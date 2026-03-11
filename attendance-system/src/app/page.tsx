@@ -71,26 +71,26 @@ export default function Home() {
         </div>
         <Link
           href="/soldiers"
-          className="w-fit rounded-md border border-sky-300 bg-sky-100 px-3 py-2 text-sm hover:border-[#6B7D3A]"
+          className="w-fit rounded-md border border-[#0b1f3b]/30 bg-[#0b1f3b]/5 px-3 py-2 text-sm text-slate-900 hover:bg-[#0b1f3b]/10"
         >
           Manage soldiers
         </Link>
       </div>
 
-      <div className="mt-6 grid gap-3 sm:grid-cols-4">
-          <div className="rounded-lg border border-slate-200/40 bg-white/5 p-4 shadow-sm shadow-sky-900/40">
+      <div className="mt-4 grid gap-3 sm:grid-cols-4">
+          <div className="rounded-lg border border-[#02254E]/30 bg-[#02254E]/8 px-3 py-3 shadow-sm">
             <div className="text-xs text-slate-700">Total Soldiers</div>
             <div className="mt-1 text-2xl font-semibold">{stats.total}</div>
           </div>
-          <div className="rounded-lg border border-slate-200/40 bg-white/5 p-4 shadow-sm shadow-sky-900/40">
+          <div className="rounded-lg border border-[#02254E]/30 bg-[#02254E]/8 px-3 py-3 shadow-sm">
             <div className="text-xs text-slate-700">Present Today</div>
             <div className="mt-1 text-2xl font-semibold">{stats.present}</div>
           </div>
-          <div className="rounded-lg border border-slate-200/40 bg-white/5 p-4 shadow-sm shadow-sky-900/40">
+          <div className="rounded-lg border border-[#02254E]/30 bg-[#02254E]/8 px-3 py-3 shadow-sm">
             <div className="text-xs text-slate-700">Absent Today</div>
             <div className="mt-1 text-2xl font-semibold">{stats.absent}</div>
           </div>
-          <div className="rounded-lg border border-slate-200/40 bg-white/5 p-4 shadow-sm shadow-sky-900/40">
+          <div className="rounded-lg border border-[#02254E]/30 bg-[#02254E]/8 px-3 py-3 shadow-sm">
             <div className="text-xs text-slate-700">Deserters (derived)</div>
             <div className="mt-1 text-2xl font-semibold">{stats.deserters}</div>
           </div>
@@ -105,8 +105,7 @@ export default function Home() {
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="mt-1 w-full rounded-md border border-slate-700 bg-[ #9fcffc] px-3 py-2 text-sm text-slate-700 outline-none focus:border-sky-400"
-                placeholder="e.g. MIL-000123 or John"
+                className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-[#02254E]"                placeholder="e.g. MIL-000123 or John"
               />
             </div>
             <div className="w-full sm:w-56">
@@ -127,9 +126,9 @@ export default function Home() {
           </div>
       </div>
 
-      <div className="mt-6 overflow-x-auto rounded-lg border border-slate-200 bg-white">
-          <table className="w-full min-w-[1040px] text-left text-sm">
-            <thead className="border-b border-slate-200 bg-sky-50 text-xs uppercase tracking-wider text-slate-600">
+      <div className="mt-4 overflow-x-auto rounded-lg border border-slate-200 bg-white">
+          <table className="w-full min-w-[900px] text-left text-sm">
+            <thead className="border-b border-slate-200 bg-[#02254E] text-xs uppercase tracking-wider text-white">
               <tr>
                 <th className="px-3 py-3">Photo</th>
                 <th className="px-3 py-3">Name</th>
@@ -149,15 +148,15 @@ export default function Home() {
                 return (
                   <tr
                     key={s.id}
-                    className={`hover:bg-[#9fcffc]/40 ${
+                    className={`hover:bg-[#02254E]/5 ${
                       isDeserter ? "bg-rose-950/20" : ""
                     }`}
                   >
-                    <td className="px-3 py-3">
+                    <td className="px-3 py-2">
                       <button
                         type="button"
                         onClick={() => setProfileId(s.id)}
-                        className="h-10 w-10 overflow-hidden rounded border border-sky-300 bg-sky-100"
+                        className="h-10 w-10 overflow-hidden rounded border border-[#02254E]/30 bg-[#02254E]/10"
                       >
                         {s.photo?.kind === "URL" && s.photo.url ? (
                           <img
@@ -172,7 +171,7 @@ export default function Home() {
                         )}
                       </button>
                     </td>
-                    <td className="px-3 py-3 font-medium">
+                    <td className="px-3 py-2 font-medium">
                       {s.fullName}
                       {isDeserter && (
                         <span className="ml-2 rounded-full bg-rose-900/40 px-2 py-0.5 text-[10px] font-semibold text-rose-200">
@@ -180,10 +179,10 @@ export default function Home() {
                         </span>
                       )}
                     </td>
-                    <td className="px-3 py-3 text-[#080c12]">{s.soldierId}</td>
-                    <td className="px-3 py-3">{s.rank}</td>
-                    <td className="px-3 py-3 text-[#080c12]">{s.unitId}</td>
-                    <td className="px-3 py-3">
+                    <td className="px-3 py-2 text-[#080c12]">{s.soldierId}</td>
+                    <td className="px-3 py-2">{s.rank}</td>
+                    <td className="px-3 py-2 text-[#080c12]">{s.unitId}</td>
+                    <td className="px-3 py-2">
                       <div className="flex gap-1">
                         {previousKeys.map((d) => {
                           const prevEntry = app
@@ -203,7 +202,7 @@ export default function Home() {
                         })}
                       </div>
                     </td>
-                    <td className="px-3 py-3">
+                    <td className="px-3 py-2">
                       <span
                         className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${
                           e?.status === "PRESENT"
@@ -216,7 +215,7 @@ export default function Home() {
                         {e?.status ?? "—"}
                       </span>
                     </td>
-                    <td className="px-3 py-3 text-[#080c12]">
+                    <td className="px-3 py-2 text-[#080c12]">
                       <select
                         value={reasonById[s.id] ?? ""}
                         onChange={(e) =>
@@ -225,7 +224,7 @@ export default function Home() {
                             [s.id]: e.target.value as AbsenceReasonType,
                           }))
                         }
-                        className="w-full rounded-md border border-sky-300 bg-sky-100 px-2 py-1 text-xs outline-none focus:border-[#6B7D3A]"
+                        className="w-full rounded-md border border-[#02254E]/30 bg-[#02254E]/5px-2 py-1 text-xs outline-none focus:border-[#6B7D3A]"
                       >
                         <option value="">Select reason</option>
                         <option value="FAMILY">Family Issue</option>
@@ -240,17 +239,17 @@ export default function Home() {
                         </div>
                       )}
                     </td>
-                    <td className="px-3 py-3">
-                      <div className="flex gap-2">
+                    <td className="px-3 py-2">
+                      <div className="flex gap-1.5">
                         <button
                           onClick={() => mark(s, "PRESENT")}
-                          className="rounded-md border border-sky-300 bg-sky-100 px-3 py-1.5 text-xs hover:border-[#6B7D3A]"
+                          className="inline-flex items-center gap-1 rounded-full border border-emerald-400 bg-emerald-50 px-2.5 py-1 text-[11px] font-medium text-emerald-800 hover:bg-emerald-100"
                         >
                           Present
                         </button>
                         <button
                           onClick={() => mark(s, "ABSENT")}
-                          className="rounded-md border border-sky-300 bg-sky-100 px-3 py-1.5 text-xs hover:border-[#6B7D3A]"
+                          className="inline-flex items-center gap-1 rounded-full border border-rose-400 bg-rose-50 px-2.5 py-1 text-[11px] font-medium text-rose-800 hover:bg-rose-100"
                         >
                           Absent
                         </button>
@@ -278,7 +277,6 @@ export default function Home() {
         const soldier = app.getSoldier(profileId);
         if (!soldier) return null;
         const entry = todayEntries[profileId];
-        // Simple recent attendance preview (last 3 days + today)
         const recentDates = [todayKey, ...previousKeys];
         return (
           <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/60 p-4">
@@ -291,7 +289,7 @@ export default function Home() {
                   <div className="mt-0.5 text-xs text-slate-500">
                     Detailed overview for daily review
                   </div>
-        </div>
+                </div>
                 <button
                   onClick={() => setProfileId(null)}
                   className="rounded-md border border-slate-300 bg-slate-100 px-3 py-1 text-xs text-slate-800 hover:bg-slate-200"
@@ -304,17 +302,18 @@ export default function Home() {
                 <div className="flex flex-col gap-5 md:flex-row md:items-start">
                   <div className="flex shrink-0 flex-col items-center gap-3 md:items-start">
                     <div className="h-40 w-40 overflow-hidden rounded-xl border border-slate-200 bg-slate-100">
-                    {soldier.photo?.kind === "URL" && soldier.photo.url ? (
-                      <img
-                        src={soldier.photo.url}
-                        alt={soldier.fullName}
-                        className="h-full w-full object-cover"
-                      />
-                    ) : (
-                      <div className="flex h-full w-full items-center justify-center text-xs text-slate-500">
-                        N/A
-                      </div>
-                    )}
+                      {soldier.photo?.kind === "URL" && soldier.photo.url ? (
+                        <img
+                          src={soldier.photo.url}
+                          alt={soldier.fullName}
+                          className="h-full w-full object-cover"
+                        />
+                      ) : (
+                        <div className="flex h-full w-full items-center justify-center text-xs text-slate-500">
+                          N/A
+                        </div>
+                      )}
+                    </div>
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="text-xl font-semibold text-slate-900">
@@ -324,24 +323,24 @@ export default function Home() {
                       {soldier.rank} • {soldier.unitId}
                     </div>
                     <div className="mt-4 grid gap-3 sm:grid-cols-3">
-                      <div className="rounded-lg border border-slate-200 bg-sky-50 px-3 py-2">
-                        <div className="text-[11px] font-semibold uppercase tracking-wide text-slate-600">
+                      <div className="rounded-lg border border-slate-200 bg-[#0b1f3b]/5 px-3 py-2">
+                        <div className="text-[11px] font-semibold uppercase tracking-wide text-slate-700">
                           Soldier ID
                         </div>
                         <div className="mt-1 text-sm text-slate-900">
                           {soldier.soldierId}
                         </div>
                       </div>
-                      <div className="rounded-lg border border-slate-200 bg-sky-50 px-3 py-2">
-                        <div className="text-[11px] font-semibold uppercase tracking-wide text-slate-600">
+                      <div className="rounded-lg border border-slate-200 bg-[#0b1f3b]/5 px-3 py-2">
+                        <div className="text-[11px] font-semibold uppercase tracking-wide text-slate-700">
                           Date joined
                         </div>
                         <div className="mt-1 text-sm text-slate-900">
                           {soldier.dateJoined}
                         </div>
                       </div>
-                      <div className="rounded-lg border border-slate-200 bg-sky-50 px-3 py-2">
-                        <div className="text-[11px] font-semibold uppercase tracking-wide text-slate-600">
+                      <div className="rounded-lg border border-slate-200 bg-[#0b1f3b]/5 px-3 py-2">
+                        <div className="text-[11px] font-semibold uppercase tracking-wide text-slate-700">
                           Phone
                         </div>
                         <div className="mt-1 text-sm text-slate-900">
@@ -353,8 +352,8 @@ export default function Home() {
                 </div>
 
                 <div className="mt-6 grid gap-4 md:grid-cols-2">
-                  <div className="rounded-lg border border-slate-200 bg-sky-50 px-4 py-3 text-sm text-slate-900">
-                    <div className="text-xs font-semibold uppercase tracking-wide text-slate-600">
+                  <div className="rounded-lg border border-slate-200 bg-[#0b1f3b]/5 px-4 py-3 text-sm text-slate-900">
+                    <div className="text-xs font-semibold uppercase tracking-wide text-slate-700">
                       Today
                     </div>
                     <div className="mt-2 flex items-center gap-2">
@@ -375,7 +374,7 @@ export default function Home() {
                   </div>
 
                   <div className="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3">
-                    <div className="text-xs font-semibold uppercase tracking-wide text-slate-600">
+                    <div className="text-xs font-semibold uppercase tracking-wide text-slate-700">
                       Recent attendance
                     </div>
                     <div className="mt-2 flex flex-wrap gap-2 text-xs">
@@ -411,7 +410,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-        </div>
+          </div>
         );
       })()}
       </main>

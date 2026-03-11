@@ -23,7 +23,7 @@ export default function ReportsPage() {
       </div>
 
       <div className="mt-6 grid gap-3 sm:grid-cols-2">
-        <div className="rounded-lg border border-sky-300 bg-sky-100 p-4">
+        <div className="rounded-lg border border-[#0b1f3b]/30 bg-[#0b1f3b]/5 p-4">
           <div className="text-sm font-semibold">Daily attendance</div>
           <div className="mt-1 text-sm text-[#080c12]">
             Date: <span className="text-[#E6EAE7]">{today}</span>
@@ -44,7 +44,7 @@ export default function ReportsPage() {
           </div>
         </div>
 
-        <div className="rounded-lg border border-sky-300 bg-sky-100 p-4">
+        <div className="rounded-lg border border-[#0b1f3b]/30 bg-[#0b1f3b]/5 p-4">
           <div className="text-sm font-semibold">Deserter list</div>
           <div className="mt-1 text-sm text-[#080c12]">
             Derived using threshold: {app.deserterThresholdDays} absent days (unverified).

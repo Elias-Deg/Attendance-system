@@ -47,7 +47,7 @@ export default function SoldiersPage() {
             setForm(emptyForm);
             setShowCreate(true);
           }}
-          className="w-fit rounded-md border border-sky-300 bg-sky-100 px-3 py-2 text-sm text-slate-900 hover:bg-sky-200"
+          className="w-fit rounded-md border border-[#0b1f3b]/30 bg-[#0b1f3b]/5 px-3 py-2 text-sm text-slate-900 hover:bg-[#0b1f3b]/10"
         >
           + Register soldier
         </button>
@@ -59,7 +59,7 @@ export default function SoldiersPage() {
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-sky-400"
+            className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-[#02254E]"
             placeholder="Search soldiers..."
           />
         </div>
@@ -68,7 +68,7 @@ export default function SoldiersPage() {
           <input
             value={unitId}
             onChange={(e) => setUnitId(e.target.value)}
-            className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-sky-400"
+            className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-[#02254E]"
             placeholder="Alpha / Bravo ..."
           />
         </div>
@@ -76,7 +76,7 @@ export default function SoldiersPage() {
 
       <div className="mt-6 overflow-x-auto rounded-lg border border-slate-200 bg-white">
         <table className="w-full min-w-[920px] text-left text-sm">
-          <thead className="border-b border-slate-200 bg-sky-50 text-xs uppercase tracking-wider text-slate-600">
+          <thead className="border-b border-slate-200 bg-[#0b1f3b]/5 text-xs uppercase tracking-wider text-slate-700">
             <tr>
               <th className="px-3 py-3">Photo</th>
               <th className="px-3 py-3">Name</th>
@@ -89,9 +89,9 @@ export default function SoldiersPage() {
           </thead>
           <tbody className="divide-y divide-slate-100">
             {soldiers.map((s) => (
-              <tr key={s.id} className="hover:bg-sky-50">
+              <tr key={s.id} className="hover:bg-[#0b1f3b]/5">
                 <td className="px-3 py-3">
-                  <div className="h-10 w-10 overflow-hidden rounded border border-slate-200 bg-sky-100">
+                  <div className="h-10 w-10 overflow-hidden rounded border border-slate-200 bg-[#0b1f3b]/10">
                     {s.photo?.kind === "URL" && s.photo.url ? (
                       <img
                         src={s.photo.url}
@@ -118,13 +118,13 @@ export default function SoldiersPage() {
                   <div className="flex gap-2">
                     <Link
                       href={`/soldiers/${s.id}`}
-                      className="rounded-md border border-sky-300 bg-sky-100 px-3 py-1.5 text-xs text-slate-900 hover:bg-sky-200"
+                      className="rounded-md border border-[#0b1f3b]/30 bg-[#0b1f3b]/5 px-3 py-1.5 text-xs text-slate-900 hover:bg-[#0b1f3b]/10"
                     >
                       View
                     </Link>
                     <button
                       onClick={() => app.archiveSoldier(s.id)}
-                      className="rounded-md border border-sky-300 bg-sky-100 px-3 py-1.5 text-xs text-slate-900 hover:bg-sky-200"
+                      className="rounded-md border border-[#0b1f3b]/30 bg-[#0b1f3b]/5 px-3 py-1.5 text-xs text-slate-900 hover:bg-[#0b1f3b]/10"
                     >
                       Archive
                     </button>
@@ -155,7 +155,7 @@ export default function SoldiersPage() {
               </div>
               <button
                 onClick={() => setShowCreate(false)}
-                className="rounded-md border border-slate-300 bg-sky-50 px-2 py-1 text-xs text-slate-900 hover:bg-sky-100"
+                className="rounded-md border border-slate-300 bg-[#02254E]/5 px-2 py-1 text-xs text-slate-900 hover:bg-[#02254E]/10"
               >
                 Close
               </button>
@@ -167,7 +167,7 @@ export default function SoldiersPage() {
                 <input
                   value={form.soldierId}
                   onChange={(e) => setForm({ ...form, soldierId: e.target.value })}
-                  className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-sky-400"
+                  className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-[#02254E]"
                 />
               </div>
               <div className="sm:col-span-1">
@@ -175,7 +175,7 @@ export default function SoldiersPage() {
                 <input
                   value={form.fullName}
                   onChange={(e) => setForm({ ...form, fullName: e.target.value })}
-                  className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-sky-400"
+                  className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-[#02254E]"
                 />
               </div>
               <div>
@@ -183,7 +183,7 @@ export default function SoldiersPage() {
                 <input
                   value={form.rank}
                   onChange={(e) => setForm({ ...form, rank: e.target.value })}
-                  className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-sky-400"
+                  className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-[#02254E]"
                 />
               </div>
               <div>
@@ -191,7 +191,7 @@ export default function SoldiersPage() {
                 <input
                   value={form.unitId}
                   onChange={(e) => setForm({ ...form, unitId: e.target.value })}
-                  className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-sky-400"
+                  className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-[#02254E]"
                 />
               </div>
               <div>
@@ -200,7 +200,7 @@ export default function SoldiersPage() {
                   type="date"
                   value={form.dateJoined}
                   onChange={(e) => setForm({ ...form, dateJoined: e.target.value })}
-                  className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-sky-400"
+                  className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-[#02254E]"
                 />
               </div>
               <div>
@@ -208,7 +208,7 @@ export default function SoldiersPage() {
                 <input
                   value={form.phone ?? ""}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                  className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-sky-400"
+                  className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-[#02254E]"
                 />
               </div>
               <div className="sm:col-span-2">
@@ -218,7 +218,7 @@ export default function SoldiersPage() {
                 <input
                   value={form.photoUrl ?? ""}
                   onChange={(e) => setForm({ ...form, photoUrl: e.target.value })}
-                  className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-sky-400"
+                  className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-[#02254E]"
                   placeholder="https://..."
                 />
                 <div className="mt-2 text-xs text-slate-600">
@@ -232,7 +232,7 @@ export default function SoldiersPage() {
             <div className="flex items-center justify-end gap-2 border-t border-[#2A3A30] px-4 py-3">
               <button
                 onClick={() => setShowCreate(false)}
-                className="rounded-md border border-sky-300 bg-sky-100 px-3 py-2 text-sm"
+                className="rounded-md border border-[#02254E]/30 bg-[#02254E]/5px-3 py-2 text-sm"
               >
                 Cancel
               </button>

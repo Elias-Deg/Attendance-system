@@ -29,7 +29,7 @@ const seedSoldiers: Soldier[] = [
     phone: "+20123456781",
     photo: {
       kind: "URL",
-      url: "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&w=200&h=200&fit=crop",
+      url: "/male1.png",
     },
     status: "ACTIVE",
   },
@@ -44,7 +44,7 @@ const seedSoldiers: Soldier[] = [
     phone: "+20123456782",
     photo: {
       kind: "URL",
-      url: "https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg?auto=compress&w=200&h=200&fit=crop",
+      url: "/Female.png",
     },
     status: "ACTIVE",
   },
@@ -59,7 +59,7 @@ const seedSoldiers: Soldier[] = [
     phone: "+20123456783",
     photo: {
       kind: "URL",
-      url: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&w=200&h=200&fit=crop",
+      url: "/male2.png",
     },
     status: "ACTIVE",
   },

@@ -43,20 +43,20 @@ export default function ProofsPage() {
 
       <div className="mt-6 grid gap-3 sm:grid-cols-3">
         <div className="sm:col-span-2">
-          <label className="text-xs text-[#080c12]">Search</label>
+          <label className="text-xs text-slate-700">Search</label>
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="mt-1 w-full rounded-md border border-sky-300 bg-sky-100 px-3 py-2 text-sm outline-none focus:border-[#6B7D3A]"
+            className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-[#0b1f3b]"
             placeholder="Name / ID / URL / date..."
           />
         </div>
         <div>
-          <label className="text-xs text-[#080c12]">Status</label>
+          <label className="text-xs text-slate-700">Status</label>
           <select
             value={status}
             onChange={(e) => setStatus(e.target.value as any)}
-            className="mt-1 w-full rounded-md border border-sky-300 bg-sky-100 px-3 py-2 text-sm outline-none focus:border-[#6B7D3A]"
+            className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-[#0b1f3b]"
           >
             <option value="ALL">All</option>
             <option value="PENDING">Pending</option>
@@ -72,13 +72,13 @@ export default function ProofsPage() {
           return (
             <div
               key={p.id}
-              className="rounded-lg border border-sky-300 bg-sky-100 p-4"
+              className="rounded-lg border border-slate-200 bg-white p-4"
             >
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div className="min-w-0">
-                  <div className="text-xs text-[#080c12]">
-                    Date: <span className="text-[#E6EAE7]">{p.date}</span> • Status:{" "}
-                    <span className="text-[#E6EAE7]">{p.status}</span>
+                  <div className="text-xs text-slate-600">
+                    Date: <span className="text-slate-900">{p.date}</span> • Status:{" "}
+                    <span className="text-slate-900">{p.status}</span>
                   </div>
                   <div className="mt-1">
                     {soldier ? (
@@ -93,14 +93,14 @@ export default function ProofsPage() {
                     {p.url}
                   </a>
                   {p.notes ? (
-                    <div className="mt-2 text-sm text-[#080c12]">{p.notes}</div>
+                    <div className="mt-2 text-sm text-slate-700">{p.notes}</div>
                   ) : null}
                 </div>
 
                 <div className="flex flex-wrap gap-2">
                   <button
                     onClick={() => app.reviewProof({ proofId: p.id, status: "PENDING" })}
-                    className="rounded-md border border-sky-300 bg-sky-100 px-3 py-1.5 text-xs hover:border-[#6B7D3A]"
+                    className="rounded-md border border-[#0b1f3b]/30 bg-[#0b1f3b]/5 px-3 py-1.5 text-xs text-slate-900 hover:bg-[#0b1f3b]/10"
                   >
                     Mark pending
                   </button>
@@ -123,7 +123,7 @@ export default function ProofsPage() {
         })}
 
         {!items.length && (
-          <div className="rounded-lg border border-sky-300 bg-sky-100 p-8 text-center text-sm text-[#080c12]">
+          <div className="rounded-lg border border-slate-200 bg-[#0b1f3b]/5 p-8 text-center text-sm text-slate-700">
             No proofs found. Add one from a soldier profile.
           </div>
         )}

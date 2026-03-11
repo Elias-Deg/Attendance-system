@@ -21,16 +21,16 @@ export function Sidebar({ theme, onToggleTheme }: SidebarProps) {
   const isDark = theme === "dark";
 
   return (
-    <aside className="hidden min-h-screen w-50 shrink-0 border-r border-slate-200 bg-white md:flex md:flex-col md:justify-between">
+    <aside className="hidden min-h-screen w-52 shrink-0 border-r border-[#011933] bg-[#02254E] md:flex md:flex-col md:justify-between">
       <div>
         <div className="px-4 py-4">
           <div className="flex items-center gap-4">
-            <div className="h-9 w-9 rounded bg-[#6B7D3A]" />
+            <div className="h-9 w-9 rounded bg-[#F4C648]" />
             <div>
-              <div className="text-sm font-semibold tracking-wide text-slate-900">
+              <div className="text-sm font-semibold tracking-wide text-white">
                 Camp Attendance
               </div>
-              <div className="text-xs text-slate-500">Demo frontend</div>
+              <div className="text-xs text-slate-200">Demo frontend</div>
             </div>
           </div>
         </div>
@@ -43,8 +43,8 @@ export function Sidebar({ theme, onToggleTheme }: SidebarProps) {
                 href={item.href}
                 className={`mx-4 flex items-center justify-between rounded-md px-1 py-2 text-sm transition-colors ${
                   active
-                    ? "bg-sky-100 text-sky-900 ring-1 ring-sky-300"
-                    : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                    ? "bg-[#0C4DA2] text-white ring-1 ring-[#F4C648]/70"
+                    : "text-slate-200 hover:bg-[#0C4DA2]/50 hover:text-white"
                 }`}
               >
                 <span>{item.label}</span>
@@ -54,16 +54,16 @@ export function Sidebar({ theme, onToggleTheme }: SidebarProps) {
         </nav>
       </div>
 
-      <div className="border-t border-slate-800 px-4 py-4">
-        <div className="flex items-center justify-between gap-2 text-xs text-slate-300">
+      <div className="border-t border-[#011933] px-4 py-4">
+        <div className="flex items-center justify-between gap-2 text-xs text-slate-200">
           <span>Theme</span>
           <button
             onClick={onToggleTheme}
-            className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-[ #9fcffc] px-3 py-1 text-xs text-slate-50 hover:border-sky-400"
+            className="inline-flex items-center gap-2 rounded-full border border-[#F4C648] bg-transparent px-3 py-1 text-xs text-white"
           >
-            <span className="h-4 w-8 rounded-full border border-slate-700 bg-[ #9fcffc]">
+            <span className="h-4 w-8 rounded-full border border-[#F4C648] bg-transparent">
               <span
-                className={`block h-3 w-3 translate-y-[2px] rounded-full bg-sky-400 transition-transform ${
+                className={`block h-3 w-3 translate-y-[2px] rounded-full bg-[#F4C648] transition-transform ${
                   isDark ? "translate-x-[18px]" : "translate-x-[2px]"
                 }`}
               />
