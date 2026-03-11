@@ -78,19 +78,3 @@ export interface AbsenceProof {
   decisionNotes?: string;
 }
 
-export type VerificationStatus = "PENDING" | "VERIFIED" | "REJECTED";
-
-export interface AbsenceProof {
-  id: string;
-  soldierId: string; // Soldier doc id in real backend
-  date: string; // YYYY-MM-DD
-  url: string; // external link (Cloudinary/Drive/etc)
-  notes?: string;
-  uploadedAt: string; // ISO
-  uploadedBy: string;
-  status: VerificationStatus;
-  reviewedAt?: string;
-  reviewedBy?: string;
-  decisionNotes?: string;
-}
-
