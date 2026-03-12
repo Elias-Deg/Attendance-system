@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { MockAppProvider } from "@/mock/store";
 import { AppShell } from "@/components/layout/AppShell";
+import { I18nProvider } from "@/i18n/I18nProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,9 +30,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <MockAppProvider>
-          <AppShell>{children}</AppShell>
-        </MockAppProvider>
+        <I18nProvider>
+          <MockAppProvider>
+            <AppShell>{children}</AppShell>
+          </MockAppProvider>
+        </I18nProvider>
       </body>
     </html>
   );

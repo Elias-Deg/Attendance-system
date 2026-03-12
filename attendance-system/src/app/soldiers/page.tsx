@@ -4,6 +4,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useMockApp, type SoldierForm } from "@/mock/store";
+import { useI18n } from "@/i18n/I18nProvider";
 
 const emptyForm: SoldierForm = {
   soldierId: "",
@@ -21,6 +22,7 @@ export default function SoldiersPage() {
   const [unitId, setUnitId] = useState("");
   const [showCreate, setShowCreate] = useState(false);
   const [form, setForm] = useState<SoldierForm>(emptyForm);
+  const { t } = useI18n();
 
   const soldiers = useMemo(
     () =>
@@ -36,10 +38,10 @@ export default function SoldiersPage() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <div className="text-lg font-semibold tracking-wide text-slate-900">
-            Soldiers
+            {t("soldiers.title")}
           </div>
           <div className="text-sm text-slate-600">
-            Register, edit, and manage soldier records (frontend demo).
+            {t("soldiers.subtitle")}
           </div>
         </div>
         <button
@@ -49,27 +51,31 @@ export default function SoldiersPage() {
           }}
           className="w-fit rounded-md border border-[#0b1f3b]/30 bg-[#0b1f3b]/5 px-3 py-2 text-sm text-slate-900 hover:bg-[#0b1f3b]/10"
         >
-          + Register soldier
+          + {t("soldiers.register")}
         </button>
       </div>
 
       <div className="mt-6 grid gap-3 sm:grid-cols-3">
         <div className="sm:col-span-2">
-          <label className="text-xs text-slate-700">Search (Name / ID)</label>
+          <label className="text-xs text-slate-700">
+            {t("filters.searchLabel")}
+          </label>
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-[#02254E]"
-            placeholder="Search soldiers..."
+            placeholder={t("soldiers.searchPlaceholder")}
           />
         </div>
         <div>
-          <label className="text-xs text-slate-700">Unit</label>
+          <label className="text-xs text-slate-700">
+            {t("filters.unitLabel")}
+          </label>
           <input
             value={unitId}
             onChange={(e) => setUnitId(e.target.value)}
             className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-[#02254E]"
-            placeholder="Alpha / Bravo ..."
+            placeholder={t("soldiers.unitPlaceholder")}
           />
         </div>
       </div>
@@ -78,13 +84,13 @@ export default function SoldiersPage() {
         <table className="w-full min-w-[920px] text-left text-sm">
           <thead className="border-b border-slate-200 bg-[#0b1f3b]/5 text-xs uppercase tracking-wider text-slate-700">
             <tr>
-              <th className="px-3 py-3">Photo</th>
-              <th className="px-3 py-3">Name</th>
-              <th className="px-3 py-3">Soldier ID</th>
-              <th className="px-3 py-3">Rank</th>
-              <th className="px-3 py-3">Unit</th>
-              <th className="px-3 py-3">Joined</th>
-              <th className="px-3 py-3">Action</th>
+              <th className="px-3 py-3">{t("table.photo")}</th>
+              <th className="px-3 py-3">{t("table.name")}</th>
+              <th className="px-3 py-3">{t("table.soldierId")}</th>
+              <th className="px-3 py-3">{t("table.rank")}</th>
+              <th className="px-3 py-3">{t("table.unit")}</th>
+              <th className="px-3 py-3">{t("profile.dateJoined")}</th>
+              <th className="px-3 py-3">{t("table.action")}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100">
@@ -120,7 +126,7 @@ export default function SoldiersPage() {
                       href={`/soldiers/${s.id}`}
                       className="rounded-md border border-[#0b1f3b]/30 bg-[#0b1f3b]/5 px-3 py-1.5 text-xs text-slate-900 hover:bg-[#0b1f3b]/10"
                     >
-                      View
+                      {t("common.close")}
                     </Link>
                     <button
                       onClick={() => app.archiveSoldier(s.id)}
@@ -138,7 +144,7 @@ export default function SoldiersPage() {
                   className="px-3 py-10 text-center text-sm text-slate-600"
                   colSpan={7}
                 >
-                  No soldiers found.
+                  {t("soldiers.noSoldiers")}
                 </td>
               </tr>
             )}
@@ -151,19 +157,21 @@ export default function SoldiersPage() {
           <div className="w-full max-w-xl rounded-lg border border-slate-200 bg-white">
             <div className="flex items-center justify-between border-b border-slate-200 px-4 py-3">
               <div className="text-sm font-semibold text-slate-900">
-                Register soldier
+                {t("soldiers.modalTitle")}
               </div>
               <button
                 onClick={() => setShowCreate(false)}
                 className="rounded-md border border-slate-300 bg-[#02254E]/5 px-2 py-1 text-xs text-slate-900 hover:bg-[#02254E]/10"
               >
-                Close
+                {t("common.close")}
               </button>
             </div>
 
             <div className="grid gap-3 px-4 py-4 sm:grid-cols-2">
               <div className="sm:col-span-1">
-                <label className="text-xs text-slate-700">Soldier ID</label>
+                <label className="text-xs text-slate-700">
+                  {t("profile.soldierId")}
+                </label>
                 <input
                   value={form.soldierId}
                   onChange={(e) => setForm({ ...form, soldierId: e.target.value })}
@@ -171,7 +179,9 @@ export default function SoldiersPage() {
                 />
               </div>
               <div className="sm:col-span-1">
-                <label className="text-xs text-slate-700">Full name</label>
+                <label className="text-xs text-slate-700">
+                  {t("table.name")}
+                </label>
                 <input
                   value={form.fullName}
                   onChange={(e) => setForm({ ...form, fullName: e.target.value })}
@@ -179,7 +189,9 @@ export default function SoldiersPage() {
                 />
               </div>
               <div>
-                <label className="text-xs text-slate-700">Rank</label>
+                <label className="text-xs text-slate-700">
+                  {t("table.rank")}
+                </label>
                 <input
                   value={form.rank}
                   onChange={(e) => setForm({ ...form, rank: e.target.value })}
@@ -187,7 +199,9 @@ export default function SoldiersPage() {
                 />
               </div>
               <div>
-                <label className="text-xs text-slate-700">Unit / Group</label>
+                <label className="text-xs text-slate-700">
+                  {t("table.unit")}
+                </label>
                 <input
                   value={form.unitId}
                   onChange={(e) => setForm({ ...form, unitId: e.target.value })}
@@ -195,7 +209,9 @@ export default function SoldiersPage() {
                 />
               </div>
               <div>
-                <label className="text-xs text-slate-700">Date joined</label>
+                <label className="text-xs text-slate-700">
+                  {t("profile.dateJoined")}
+                </label>
                 <input
                   type="date"
                   value={form.dateJoined}
@@ -204,7 +220,9 @@ export default function SoldiersPage() {
                 />
               </div>
               <div>
-                <label className="text-xs text-slate-700">Phone (optional)</label>
+                <label className="text-xs text-slate-700">
+                  {t("profile.phone")}
+                </label>
                 <input
                   value={form.phone ?? ""}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
@@ -222,9 +240,7 @@ export default function SoldiersPage() {
                   placeholder="https://..."
                 />
                 <div className="mt-2 text-xs text-slate-600">
-                  For the demo, use any public image URL. In production on Firebase
-                  Spark, we’d store an external link (Cloudinary/Drive) or a small
-                  base64 thumbnail.
+                  {t("soldiers.modalHelp")}
                 </div>
               </div>
             </div>
@@ -232,9 +248,9 @@ export default function SoldiersPage() {
             <div className="flex items-center justify-end gap-2 border-t border-[#2A3A30] px-4 py-3">
               <button
                 onClick={() => setShowCreate(false)}
-                className="rounded-md border border-[#02254E]/30 bg-[#02254E]/5px-3 py-2 text-sm"
+                className="rounded-md border border-[#02254E]/30 bg-[#02254E]/5 px-3 py-2 text-sm"
               >
-                Cancel
+                {t("common.cancel")}
               </button>
               <button
                 onClick={() => {
@@ -242,9 +258,9 @@ export default function SoldiersPage() {
                   app.addSoldier(form);
                   setShowCreate(false);
                 }}
-                className="rounded-md bg-[#6B7D3A] px-3 py-2 text-sm font-semibold text-[#9fcffc] hover:brightness-110"
+                className="rounded-md bg-[#02254E] px-3 py-2 text-sm font-semibold text-white hover:bg-[#041a36]"
               >
-                Save soldier
+                {t("soldiers.save")}
               </button>
             </div>
           </div>

@@ -3,12 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ThemeMode } from "./AppShell";
+import Image from "next/image";
+import { useI18n } from "@/i18n/I18nProvider";
 
 const nav = [
-  { href: "/", label: "Dashboard" },
-  { href: "/soldiers", label: "Soldiers" },
-  { href: "/proofs", label: "Proof Verification" },
-  { href: "/reports", label: "Reports" },
+  { href: "/", key: "nav.dashboard" as const },
+  { href: "/soldiers", key: "nav.soldiers" as const },
+  { href: "/proofs", key: "nav.proofs" as const },
+  { href: "/reports", key: "nav.reports" as const },
 ];
 
 interface SidebarProps {
@@ -19,16 +21,26 @@ interface SidebarProps {
 export function Sidebar({ theme, onToggleTheme }: SidebarProps) {
   const pathname = usePathname();
   const isDark = theme === "dark";
+  const { locale, setLocale, t } = useI18n();
 
   return (
     <aside className="hidden min-h-screen w-52 shrink-0 border-r border-[#011933] bg-[#02254E] md:flex md:flex-col md:justify-between">
       <div>
         <div className="px-4 py-4">
           <div className="flex items-center gap-4">
-            <div className="h-9 w-9 rounded bg-[#F4C648]" />
+            <div className="h-20 w-20 overflow-hidden rounded-3xl bg-white/10 ring-1 ring-white/20">
+              <Image
+                src="/logo2.png"
+                alt="Logo"
+                width={96}
+                height={96}
+                className="h-full w-full object-contain p-1"
+                priority
+              />
+            </div>
             <div>
               <div className="text-sm font-semibold tracking-wide text-white">
-                Camp Attendance
+                {t("app.title")}
               </div>
               <div className="text-xs text-slate-200">Demo frontend</div>
             </div>
@@ -47,7 +59,7 @@ export function Sidebar({ theme, onToggleTheme }: SidebarProps) {
                     : "text-slate-200 hover:bg-[#0C4DA2]/50 hover:text-white"
                 }`}
               >
-                <span>{item.label}</span>
+                <span>{t(item.key)}</span>
               </Link>
             );
           })}
@@ -56,6 +68,18 @@ export function Sidebar({ theme, onToggleTheme }: SidebarProps) {
 
       <div className="border-t border-[#011933] px-4 py-4">
         <div className="flex items-center justify-between gap-2 text-xs text-slate-200">
+          <span>{t("theme.label")}</span>
+          <select
+            value={locale}
+            onChange={(e) => setLocale(e.target.value as any)}
+            className="rounded-md border border-white/30 bg-white/10 px-2 py-1 text-xs text-white outline-none"
+          >
+            <option value="am">አማርኛ</option>
+            <option value="en">English</option>
+          </select>
+        </div>
+
+        <div className="mt-3 flex items-center justify-between gap-2 text-xs text-slate-200">
           <span>Theme</span>
           <button
             onClick={onToggleTheme}
@@ -68,7 +92,7 @@ export function Sidebar({ theme, onToggleTheme }: SidebarProps) {
                 }`}
               />
             </span>
-            <span>{isDark ? "Dark" : "Light"}</span>
+            <span>{isDark ? t("theme.dark") : t("theme.light")}</span>
           </button>
         </div>
       </div>

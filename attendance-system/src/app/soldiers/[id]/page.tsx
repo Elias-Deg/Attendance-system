@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import { useMockApp } from "@/mock/store";
 import type { AbsenceReasonType } from "@/types/domain";
+import { useI18n } from "@/i18n/I18nProvider";
 
 function badgeClass(status: string) {
   if (status === "PRESENT") return "bg-emerald-900/40 text-emerald-200";
@@ -22,6 +23,7 @@ export default function SoldierProfilePage() {
   const [proofUrl, setProofUrl] = useState("");
   const [proofNotes, setProofNotes] = useState("");
   const [showProof, setShowProof] = useState(false);
+  const { t } = useI18n();
 
   const day = app.getAttendanceDay(today);
   const todayEntry = day.entries[id];
@@ -38,10 +40,10 @@ export default function SoldierProfilePage() {
 
   if (!soldier) {
     return (
-      <div className="rounded-lg border border-[#02254E]/30 bg-[#02254E]/5p-6">
-        <div className="text-sm text-[#080c12]">Soldier not found.</div>
+      <div className="rounded-lg border border-[#02254E]/30 bg-[#02254E]/5 p-6">
+        <div className="text-sm text-[#080c12]">{t("soldierProfile.notFound")}</div>
         <Link href="/soldiers" className="mt-3 inline-block text-sm underline">
-          Back to soldiers
+          {t("soldierProfile.back")}
         </Link>
       </div>
     );
@@ -51,7 +53,9 @@ export default function SoldierProfilePage() {
     <div>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <div className="text-lg font-semibold tracking-wide">Soldier Profile</div>
+          <div className="text-lg font-semibold tracking-wide">
+            {t("soldierProfile.title")}
+          </div>
           <div className="text-sm text-[#080c12]">
             {soldier.fullName} • {soldier.soldierId}
           </div>
@@ -59,15 +63,15 @@ export default function SoldierProfilePage() {
         <div className="flex gap-2">
           <Link
             href="/soldiers"
-            className="rounded-md border border-[#02254E]/30 bg-[#02254E]/5px-3 py-2 text-sm hover:border-[#6B7D3A]"
+            className="rounded-md border border-[#02254E]/30 bg-[#02254E]/5 px-3 py-2 text-sm hover:border-[#6B7D3A]"
           >
-            Back
+            {t("common.back")}
           </Link>
           <button
             onClick={() => setShowProof(true)}
-            className="rounded-md bg-[#6B7D3A] px-3 py-2 text-sm font-semibold text-[#9fcffc] hover:brightness-110"
+            className="rounded-md bg-[#02254E] px-3 py-2 text-sm font-semibold text-white hover:bg-[#041a36]"
           >
-            Add proof link
+            {t("soldierProfile.addProof")}
           </button>
         </div>
       </div>
@@ -99,8 +103,10 @@ export default function SoldierProfilePage() {
             </div>
           </div>
 
-          <div className="mt-4 rounded-md border border-[#02254E]/30 bg-[#02254E]/5p-3">
-            <div className="text-xs text-[#080c12]">Today’s status</div>
+          <div className="mt-4 rounded-md border border-[#02254E]/30 bg-[#02254E]/5 px-3 py-3">
+            <div className="text-xs text-[#080c12]">
+              {t("profile.today")} {t("profile.status").toLowerCase()}
+            </div>
             <div className="mt-2 flex items-center justify-between gap-2">
               <span className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${badgeClass(todayEntry?.status ?? "")}`}>
                 {todayEntry?.status ?? "—"}
@@ -122,7 +128,8 @@ export default function SoldierProfilePage() {
             </div>
             {todayEntry?.status === "ABSENT" && (
               <div className="mt-2 text-xs text-[#080c12]">
-                Reason: <span className="text-[#E6EAE7]">{todayEntry.reason?.type}</span>
+                {t("profile.reason")}:{" "}
+                <span className="text-[#E6EAE7]">{todayEntry.reason?.type}</span>
                 {todayEntry.reason?.text ? (
                   <span className="text-[#080c12]"> ({todayEntry.reason.text})</span>
                 ) : null}
@@ -133,16 +140,19 @@ export default function SoldierProfilePage() {
 
         <div className="rounded-lg border border-[#02254E]/30 bg-[#02254E]/5 px-4 py-4 lg:col-span-2">
           <div className="flex items-center justify-between">
-            <div className="text-sm font-semibold">Attendance history (last 14 marked days)</div>
-            <div className="text-xs text-[#080c12]">Demo data updates as you mark</div>
+            <div className="text-sm font-semibold">{t("profile.recentAttendance")}</div>
+            <div className="text-xs text-[#080c12]">
+              {/* keep short helper text untranslated for now */}
+              Demo data updates as you mark
+            </div>
           </div>
           <div className="mt-3 overflow-x-auto rounded-md border border-[#2A3A30]">
             <table className="w-full min-w-[640px] text-left text-sm">
               <thead className="border-b border-[#2A3A30] text-xs uppercase tracking-wider text-[#080c12]">
                 <tr>
-                  <th className="px-3 py-2">Date</th>
-                  <th className="px-3 py-2">Status</th>
-                  <th className="px-3 py-2">Reason</th>
+                  <th className="px-3 py-2">{t("filters.unitLabel")}</th>
+                  <th className="px-3 py-2">{t("profile.status")}</th>
+                  <th className="px-3 py-2">{t("profile.reason")}</th>
                   <th className="px-3 py-2">Proof</th>
                 </tr>
               </thead>
@@ -166,7 +176,7 @@ export default function SoldierProfilePage() {
                 {!history.length && (
                   <tr>
                     <td className="px-3 py-8 text-center text-sm text-[#080c12]" colSpan={4}>
-                      No attendance marked yet.
+                      {t("soldierProfile.noAttendance")}
                     </td>
                   </tr>
                 )}
@@ -175,7 +185,9 @@ export default function SoldierProfilePage() {
           </div>
 
           <div className="mt-5">
-            <div className="text-sm font-semibold">Proof documents</div>
+            <div className="text-sm font-semibold">
+              {t("soldierProfile.proofs")}
+            </div>
             <div className="mt-2 grid gap-2">
               {soldierProofs.map((p) => (
                 <div
@@ -195,16 +207,16 @@ export default function SoldierProfilePage() {
                   <div className="flex gap-2">
                     <Link
                       href="/proofs"
-                      className="rounded-md border border-[#02254E]/30 bg-[#02254E]/5px-3 py-1.5 text-xs hover:border-[#6B7D3A]"
+                      className="rounded-md border border-[#02254E]/30 bg-[#02254E]/5 px-3 py-1.5 text-xs hover:border-[#6B7D3A]"
                     >
-                      Review queue
+                      {t("soldierProfile.reviewQueue")}
                     </Link>
                   </div>
                 </div>
               ))}
               {!soldierProofs.length && (
-                <div className="rounded-md border border-[#02254E]/30 bg-[#02254E]/5p-3 text-sm text-[#080c12]">
-                  No proofs uploaded yet.
+                <div className="rounded-md border border-[#02254E]/30 bg-[#02254E]/5 p-3 text-sm text-[#080c12]">
+                  {t("soldierProfile.noProofs")}
                 </div>
               )}
             </div>
@@ -216,7 +228,9 @@ export default function SoldierProfilePage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
           <div className="w-full max-w-xl rounded-lg border border-[#02254E]/30 bg-white">
             <div className="flex items-center justify-between border-b border-[#2A3A30] px-4 py-3">
-              <div className="text-sm font-semibold">Add absence proof (external link)</div>
+              <div className="text-sm font-semibold">
+                {t("soldierProfile.addProofTitle")}
+              </div>
               <button
                 onClick={() => setShowProof(false)}
                 className="rounded-md border border-slate-300 bg-slate-100 px-2 py-1 text-xs text-slate-900 hover:bg-slate-200"
@@ -226,7 +240,9 @@ export default function SoldierProfilePage() {
             </div>
             <div className="grid gap-3 px-4 py-4">
               <div>
-                <label className="text-xs text-[#080c12]">Proof URL</label>
+                <label className="text-xs text-[#080c12]">
+                  {t("soldierProfile.proofUrl")}
+                </label>
                 <input
                   value={proofUrl}
                   onChange={(e) => setProofUrl(e.target.value)}
@@ -235,7 +251,9 @@ export default function SoldierProfilePage() {
                 />
               </div>
               <div>
-                <label className="text-xs text-[#080c12]">Notes (optional)</label>
+                <label className="text-xs text-[#080c12]">
+                  {t("soldierProfile.notesOptional")}
+                </label>
                 <textarea
                   value={proofNotes}
                   onChange={(e) => setProofNotes(e.target.value)}
@@ -244,7 +262,7 @@ export default function SoldierProfilePage() {
                 />
               </div>
               <div className="text-xs text-[#080c12]">
-                Spark plan constraint: we store only an external link (no Firebase Storage).
+                {t("soldierProfile.sparkNote")}
               </div>
             </div>
             <div className="flex items-center justify-end gap-2 border-t border-[#2A3A30] px-4 py-3">
@@ -252,7 +270,7 @@ export default function SoldierProfilePage() {
                 onClick={() => setShowProof(false)}
                 className="rounded-md border border-slate-300 bg-slate-100 px-3 py-2 text-sm text-slate-900 hover:bg-slate-200"
               >
-                Cancel
+                {t("common.cancel")}
               </button>
               <button
                 onClick={() => {
@@ -264,7 +282,7 @@ export default function SoldierProfilePage() {
                 }}
                 className="rounded-md bg-[#02254E] px-3 py-2 text-sm font-semibold text-white hover:bg-[#041a36]"
               >
-                Save proof
+                {t("soldierProfile.saveProof")}
               </button>
             </div>
           </div>

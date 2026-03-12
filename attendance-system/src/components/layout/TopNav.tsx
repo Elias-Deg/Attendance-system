@@ -3,10 +3,13 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useOnlineStatus } from "@/hooks/useOnlineStatus";
+import Image from "next/image";
+import { useI18n } from "@/i18n/I18nProvider";
 
 export function TopNav() {
   const online = useOnlineStatus();
   const [hydrated, setHydrated] = useState(false);
+  const { t } = useI18n();
 
   useEffect(() => {
     setHydrated(true);
@@ -25,15 +28,15 @@ export function TopNav() {
               href="/"
               className="rounded-md border border-white/40 bg-white/10 px-3 py-1.5 text-xs text-white"
             >
-              Home
+              {t("nav.dashboard")}
             </Link>
           </div>
           <div className="hidden md:block">
             <div className="text-sm font-semibold tracking-wide text-white">
-              Attendance Management
+              {t("app.title")}
             </div>
             <div className="text-xs text-slate-200">
-              Military Training Camp • {date}
+              {t("app.subtitle")} • {date}
             </div>
           </div>
         </div>
@@ -46,10 +49,22 @@ export function TopNav() {
                 : "bg-amber-500/30 text-amber-50"
             }`}
           >
-            {isOnline ? "Online" : "Offline"}
+            {isOnline ? t("top.online") : t("top.offline")}
           </div>
           <div className="rounded-full bg-white px-3 py-1 text-xs text-[#02254E] ring-1 ring-white/40">
-            Role: Officer
+            {t("top.roleOfficer")}
+          </div>
+          <div className="ml-2 hidden sm:block">
+            <div className="h-16 w-16 overflow-hidden rounded-3xl bg-white/10 ring-1 ring-white/20">
+              <Image
+                src="/logo1.png"
+                alt="Logo"
+                width={96}
+                height={96}
+                className="h-full w-full object-contain p-1"
+                priority
+              />
+            </div>
           </div>
         </div>
       </div>

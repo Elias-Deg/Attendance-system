@@ -5,11 +5,13 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useMockApp } from "@/mock/store";
 import type { VerificationStatus } from "@/types/domain";
+import { useI18n } from "@/i18n/I18nProvider";
 
 export default function ProofsPage() {
   const app = useMockApp();
   const [status, setStatus] = useState<VerificationStatus | "ALL">("ALL");
   const [search, setSearch] = useState("");
+  const { t } = useI18n();
 
   const items = useMemo(() => {
     const s = search.trim().toLowerCase();
@@ -31,19 +33,24 @@ export default function ProofsPage() {
     <div>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <div className="text-lg font-semibold tracking-wide">Proof Verification</div>
+          <div className="text-lg font-semibold tracking-wide">
+            {t("proofs.title")}
+          </div>
           <div className="text-sm text-[#080c12]">
-            Review absence proof links and mark them as Verified/Rejected.
+            {t("proofs.subtitle")}
           </div>
         </div>
         <div className="text-xs text-[#080c12]">
-          Total proofs: <span className="text-[#E6EAE7]">{app.proofs.length}</span>
+          {t("proofs.total")}:{" "}
+          <span className="text-[#E6EAE7]">{app.proofs.length}</span>
         </div>
       </div>
 
       <div className="mt-6 grid gap-3 sm:grid-cols-3">
         <div className="sm:col-span-2">
-          <label className="text-xs text-slate-700">Search</label>
+          <label className="text-xs text-slate-700">
+            {t("proofs.search")}
+          </label>
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -52,16 +59,18 @@ export default function ProofsPage() {
           />
         </div>
         <div>
-          <label className="text-xs text-slate-700">Status</label>
+          <label className="text-xs text-slate-700">
+            {t("proofs.status")}
+          </label>
           <select
             value={status}
             onChange={(e) => setStatus(e.target.value as any)}
             className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-[#0b1f3b]"
           >
-            <option value="ALL">All</option>
-            <option value="PENDING">Pending</option>
-            <option value="VERIFIED">Verified</option>
-            <option value="REJECTED">Rejected</option>
+            <option value="ALL">{t("proofs.all")}</option>
+            <option value="PENDING">{t("proofs.pending")}</option>
+            <option value="VERIFIED">{t("proofs.verified")}</option>
+            <option value="REJECTED">{t("proofs.rejected")}</option>
           </select>
         </div>
       </div>
@@ -102,19 +111,19 @@ export default function ProofsPage() {
                     onClick={() => app.reviewProof({ proofId: p.id, status: "PENDING" })}
                     className="rounded-md border border-[#0b1f3b]/30 bg-[#0b1f3b]/5 px-3 py-1.5 text-xs text-slate-900 hover:bg-[#0b1f3b]/10"
                   >
-                    Mark pending
+                    {t("proofs.markPending")}
                   </button>
                   <button
                     onClick={() => app.reviewProof({ proofId: p.id, status: "VERIFIED" })}
                     className="rounded-md border border-[#2A3A30] bg-emerald-950/40 px-3 py-1.5 text-xs text-emerald-200 hover:border-emerald-500/60"
                   >
-                    Verify
+                    {t("proofs.verify")}
                   </button>
                   <button
                     onClick={() => app.reviewProof({ proofId: p.id, status: "REJECTED" })}
                     className="rounded-md border border-[#2A3A30] bg-rose-950/40 px-3 py-1.5 text-xs text-rose-200 hover:border-rose-500/60"
                   >
-                    Reject
+                    {t("proofs.reject")}
                   </button>
                 </div>
               </div>
@@ -124,7 +133,7 @@ export default function ProofsPage() {
 
         {!items.length && (
           <div className="rounded-lg border border-slate-200 bg-[#0b1f3b]/5 p-8 text-center text-sm text-slate-700">
-            No proofs found. Add one from a soldier profile.
+            {t("proofs.empty")}
           </div>
         )}
       </div>

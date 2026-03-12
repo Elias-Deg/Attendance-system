@@ -5,9 +5,11 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import type { AbsenceReasonType, AttendanceStatus } from "@/types/domain";
 import { useMockApp } from "@/mock/store";
+import { useI18n } from "@/i18n/I18nProvider";
 
 export default function Home() {
   const app = useMockApp();
+  const { t } = useI18n();
   const [search, setSearch] = useState("");
   const [unitId, setUnitId] = useState<string>("");
   const [reasonById, setReasonById] = useState<
@@ -64,34 +66,36 @@ export default function Home() {
     <main>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <div className="text-lg font-semibold tracking-wide">Dashboard</div>
+          <div className="text-lg font-semibold tracking-wide">
+            {t("dashboard.title")}
+          </div>
           <div className="text-sm text-[#080c12]">
-            Spreadsheet-style attendance for {todayKey}
+            {t("dashboard.subtitle", { date: todayKey })}
           </div>
         </div>
         <Link
           href="/soldiers"
           className="w-fit rounded-md border border-[#0b1f3b]/30 bg-[#0b1f3b]/5 px-3 py-2 text-sm text-slate-900 hover:bg-[#0b1f3b]/10"
         >
-          Manage soldiers
+          {t("dashboard.manageSoldiers")}
         </Link>
       </div>
 
       <div className="mt-4 grid gap-3 sm:grid-cols-4">
           <div className="rounded-lg border border-[#02254E]/30 bg-[#02254E]/8 px-3 py-3 shadow-sm">
-            <div className="text-xs text-slate-700">Total Soldiers</div>
+            <div className="text-xs text-slate-700">{t("stats.totalSoldiers")}</div>
             <div className="mt-1 text-2xl font-semibold">{stats.total}</div>
           </div>
           <div className="rounded-lg border border-[#02254E]/30 bg-[#02254E]/8 px-3 py-3 shadow-sm">
-            <div className="text-xs text-slate-700">Present Today</div>
+            <div className="text-xs text-slate-700">{t("stats.presentToday")}</div>
             <div className="mt-1 text-2xl font-semibold">{stats.present}</div>
           </div>
           <div className="rounded-lg border border-[#02254E]/30 bg-[#02254E]/8 px-3 py-3 shadow-sm">
-            <div className="text-xs text-slate-700">Absent Today</div>
+            <div className="text-xs text-slate-700">{t("stats.absentToday")}</div>
             <div className="mt-1 text-2xl font-semibold">{stats.absent}</div>
           </div>
           <div className="rounded-lg border border-[#02254E]/30 bg-[#02254E]/8 px-3 py-3 shadow-sm">
-            <div className="text-xs text-slate-700">Deserters (derived)</div>
+            <div className="text-xs text-slate-700">{t("stats.desertersDerived")}</div>
             <div className="mt-1 text-2xl font-semibold">{stats.deserters}</div>
           </div>
       </div>
@@ -100,21 +104,22 @@ export default function Home() {
           <div className="flex flex-1 flex-col gap-2 sm:flex-row">
             <div className="flex-1">
               <label className="text-xs text-slate-700">
-                Search (Name / ID)
+                {t("filters.searchLabel")}
               </label>
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-[#02254E]"                placeholder="e.g. MIL-000123 or John"
+                className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-[#02254E]"
+                placeholder={t("filters.searchPlaceholder")}
               />
             </div>
             <div className="w-full sm:w-56">
-              <label className="text-xs text-slate-700">Unit</label>
+              <label className="text-xs text-slate-700">{t("filters.unitLabel")}</label>
               <input
                 value={unitId}
                 onChange={(e) => setUnitId(e.target.value)}
-                className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-sky-400"
-                placeholder="unit id (for now)"
+                className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-[#02254E]"
+                placeholder={t("filters.unitPlaceholder")}
               />
             </div>
           </div>
@@ -130,15 +135,15 @@ export default function Home() {
           <table className="w-full min-w-[900px] text-left text-sm">
             <thead className="border-b border-slate-200 bg-[#02254E] text-xs uppercase tracking-wider text-white">
               <tr>
-                <th className="px-3 py-3">Photo</th>
-                <th className="px-3 py-3">Name</th>
-                <th className="px-3 py-3">Soldier ID</th>
-                <th className="px-3 py-3">Rank</th>
-                <th className="px-3 py-3">Unit</th>
-                <th className="px-3 py-3">Last 3 days</th>
-                <th className="px-3 py-3">Status</th>
-                <th className="px-3 py-3">Absence Reason</th>
-                <th className="px-3 py-3">Action</th>
+                <th className="px-3 py-3">{t("table.photo")}</th>
+                <th className="px-3 py-3">{t("table.name")}</th>
+                <th className="px-3 py-3">{t("table.soldierId")}</th>
+                <th className="px-3 py-3">{t("table.rank")}</th>
+                <th className="px-3 py-3">{t("table.unit")}</th>
+                <th className="px-3 py-3">{t("table.last3Days")}</th>
+                <th className="px-3 py-3">{t("table.status")}</th>
+                <th className="px-3 py-3">{t("table.absenceReason")}</th>
+                <th className="px-3 py-3">{t("table.action")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#1E2A23]">
@@ -226,11 +231,11 @@ export default function Home() {
                         }
                         className="w-full rounded-md border border-[#02254E]/30 bg-[#02254E]/5px-2 py-1 text-xs outline-none focus:border-[#6B7D3A]"
                       >
-                        <option value="">Select reason</option>
-                        <option value="FAMILY">Family Issue</option>
-                        <option value="HEALTH">Health Problem</option>
-                        <option value="DUTY">Official Duty</option>
-                        <option value="OTHER">Other</option>
+                        <option value="">{t("reason.select")}</option>
+                        <option value="FAMILY">{t("reason.family")}</option>
+                        <option value="HEALTH">{t("reason.health")}</option>
+                        <option value="DUTY">{t("reason.duty")}</option>
+                        <option value="OTHER">{t("reason.other")}</option>
                       </select>
                       {e?.status === "ABSENT" && e.reason?.type && (
                         <div className="mt-1 text-[11px] text-[#E6EAE7]">
@@ -245,13 +250,13 @@ export default function Home() {
                           onClick={() => mark(s, "PRESENT")}
                           className="inline-flex items-center gap-1 rounded-full border border-emerald-400 bg-emerald-50 px-2.5 py-1 text-[11px] font-medium text-emerald-800 hover:bg-emerald-100"
                         >
-                          Present
+                          {t("action.present")}
                         </button>
                         <button
                           onClick={() => mark(s, "ABSENT")}
                           className="inline-flex items-center gap-1 rounded-full border border-rose-400 bg-rose-50 px-2.5 py-1 text-[11px] font-medium text-rose-800 hover:bg-rose-100"
                         >
-                          Absent
+                          {t("action.absent")}
                         </button>
                       </div>
                     </td>
